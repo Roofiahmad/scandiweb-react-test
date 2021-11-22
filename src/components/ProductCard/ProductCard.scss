@@ -43,6 +43,46 @@
     }
   }
 
+  &__product-attribute-container {
+    .attribute {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 5px;
+      button {
+        margin-right: 10px;
+        border: 1px solid black;
+        height: 24px;
+        padding: 4px 3px;
+      }
+
+      .Green {
+        border: 1px solid #44ff03;
+        color: #ffffff;
+        background-color: #44ff03;
+      }
+      .Cyan {
+        border: 1px solid #03fff7;
+        color: #ffffff;
+        background-color: #03fff7;
+      }
+      .Blue {
+        border: 1px solid #030bff;
+        color: #ffffff;
+        background-color: #030bff;
+      }
+      .Black {
+        border: 1px solid #000000;
+        color: #ffffff;
+        background-color: #000000;
+      }
+      .White {
+        border: 1px solid #000000;
+        background-color: transparent;
+        color: #000000;
+      }
+    }
+  }
+
   &__title {
     color: #1d1f22;
     font-weight: 300;

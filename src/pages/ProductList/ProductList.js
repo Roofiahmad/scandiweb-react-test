@@ -32,6 +32,16 @@ class ProductList extends Component {
               currency
               amount
             }
+            attributes{
+              id
+              name
+              type
+              items{
+                displayValue
+                id
+                value
+              }
+            }
           }
         }
       }

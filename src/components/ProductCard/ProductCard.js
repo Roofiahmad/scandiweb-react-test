@@ -52,6 +52,21 @@ class ProductCard extends Component {
             )}
           </div>
         </Link>
+        <div className="product-card__product-attribute-container">
+          {this.props.product.attributes.map((attr, idx) => {
+            return (
+              <div key={idx} className="attribute">
+                {attr.items.map((item, index) => {
+                  return (
+                    <button key={index} className={attr.type === "swatch" ? `${item.id}` : "default"}>
+                      {attr.type === "swatch" ? item.id : item.value}
+                    </button>
+                  );
+                })}
+              </div>
+            );
+          })}
+        </div>
         <h2 style={{ opacity: !this.state.inStock ? 0.5 : 1 }} className="product-card__title">
           {this.props.product.name}
         </h2>
