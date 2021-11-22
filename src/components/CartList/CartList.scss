@@ -1,0 +1,186 @@
+.cart__itemlist {
+  box-sizing: border-box;
+  margin: 20px 0;
+  padding: 10px 0;
+  width: 85%;
+  display: grid;
+  grid-template-columns: auto 90px max-content;
+  grid-template-rows: 185px;
+  border-top: 1px solid #e5e5e5;
+
+  .item {
+    &__header {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .title {
+        &--bold {
+          display: block;
+          font-weight: 600;
+          font-size: 1.875rem;
+        }
+
+        &--light {
+          font-weight: 300;
+          font-size: 1.875rem;
+        }
+
+        &--price {
+          font-weight: 700;
+          font-size: 1.5rem;
+        }
+      }
+
+      .item__attribute {
+        // width: 150px;
+        display: flex;
+        justify-content: flex-start;
+
+        .btn {
+          border: 1px solid #000000;
+          width: 63px;
+          height: 45px;
+          margin-right: 20px;
+          //   cursor: pointer;
+          background-color: transparent;
+
+          &--none {
+            display: none;
+          }
+
+          &--white {
+            background-color: transparent;
+          }
+
+          &--black {
+            color: #ffffff;
+            background-color: #000000;
+          }
+        }
+
+        .Green {
+          border: 1px solid #44ff03;
+          color: #ffffff;
+          background-color: #44ff03;
+        }
+        .Cyan {
+          border: 1px solid #03fff7;
+          color: #ffffff;
+          background-color: #03fff7;
+        }
+        .Blue {
+          border: 1px solid #030bff;
+          color: #ffffff;
+          background-color: #030bff;
+        }
+        .Black {
+          border: 1px solid #000000;
+          color: #ffffff;
+          background-color: #000000;
+        }
+        .White {
+          border: 1px solid #000000;
+          background-color: transparent;
+          color: #000000;
+        }
+      }
+    }
+
+    &__quantity {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+
+      .btn-quantity {
+        font-size: 2rem;
+        font-weight: 300;
+        height: 45px;
+        width: 45px;
+        border: 1px solid #000000;
+        background-color: transparent;
+        cursor: pointer;
+
+        &:hover {
+          color: white;
+          background-color: #000000;
+        }
+      }
+
+      .quantity {
+        font-weight: 500;
+        font-size: 1.5rem;
+      }
+    }
+
+    &__image {
+      padding: 0 8px;
+      height: 185px;
+      width: 141px;
+      justify-self: end;
+      background-position: top;
+      background-size: cover;
+      display: flex;
+      justify-content: space-between;
+
+      &:hover {
+        .btn {
+          opacity: 1;
+        }
+      }
+
+      .btn {
+        opacity: 0;
+        cursor: pointer;
+        border: none;
+        background-color: transparent;
+      }
+
+      .image-navigation {
+        font-weight: 500;
+        font-size: 2rem;
+        color: #ffffff;
+      }
+    }
+  }
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}

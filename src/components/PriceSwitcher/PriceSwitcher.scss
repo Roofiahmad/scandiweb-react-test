@@ -1,0 +1,30 @@
+.price-switcher {
+  width: 114px;
+  height: 169px;
+  position: fixed;
+  z-index: 100;
+  top: 65px;
+  right: 5%;
+  background-color: #ffffff;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+  animation-name: appear_from_below;
+  animation-duration: 0.3s;
+
+  &__list {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    color: #1d1f22;
+    font-size: 1.125rem;
+    font-weight: 300;
+    padding: 5px 20px;
+
+    &:hover {
+      background-color: #5ece7b;
+      cursor: pointer;
+      color: #ffffff;
+    }
+  }
+}

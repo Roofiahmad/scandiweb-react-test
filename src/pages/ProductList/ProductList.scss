@@ -1,0 +1,21 @@
+.product-list {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+main {
+  padding: 0 5%;
+
+  .product-list__title {
+    font-weight: lighter;
+    font-size: 2.625rem;
+    margin: 40px 0;
+    text-transform: capitalize;
+  }
+
+  .product-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 60px;
+  }
+}

@@ -1,0 +1,41 @@
+header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 0 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  background-color: #ffffff;
+}
+
+.switch-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 8vw;
+  cursor: pointer;
+
+  .currency {
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 2vw;
+    margin-right: 15px;
+
+    .fas {
+      font-size: 0.6rem;
+    }
+  }
+  .cart {
+    display: flex;
+    align-content: baseline;
+
+    &:hover {
+      color: #44ff03;
+    }
+  }
+}
