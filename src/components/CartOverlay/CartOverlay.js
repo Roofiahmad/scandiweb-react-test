@@ -72,7 +72,6 @@ class CartOverlay extends Component {
           });
           return result;
         });
-        console.log("filtered", filteredProduct);
         this.setState({ ...this.state, productList: filteredProduct });
       })
       .catch((err) => {

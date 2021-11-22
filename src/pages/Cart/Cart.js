@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 import "./Cart.scss";
 import CartList from "../../components/CartList/CartList";
+import { Link } from "react-router-dom";
 
 class Cart extends Component {
   constructor(props) {
@@ -106,9 +107,19 @@ class Cart extends Component {
         <Header switchCategory={this.switchCategory} category={this.state.category} />
         <div className="cart">
           <p className="cart__title uppercase ">Cart</p>
-          {this.state.productList.map((product, idx) => {
-            return <CartList key={idx} ixp={idx} product={product} />;
-          })}
+          {this.state.productList.length ? (
+            this.state.productList.map((product, idx) => {
+              return <CartList key={idx} ixp={idx} product={product} />;
+            })
+          ) : (
+            <div className="sorry">
+              <p>your cart is empty</p>
+              <p>let's start exploring the product :)</p>
+              <Link to="/">
+                <button className="btn-cart uppercase">go to store</button>
+              </Link>
+            </div>
+          )}
         </div>
       </>
     );

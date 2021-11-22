@@ -33,7 +33,6 @@ class CartList extends Component {
 
   componentDidMount() {
     this.setState({ ...this.state, product: this.props.product });
-    console.log(this.props.product);
   }
 
   render() {

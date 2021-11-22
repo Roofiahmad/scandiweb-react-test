@@ -6,4 +6,33 @@
     font-weight: 700;
     margin: 2.5rem 0px;
   }
+
+  .sorry {
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-align: center;
+    color: #5ece7b;
+    line-height: 2rem;
+
+    .btn-cart {
+      margin-top: 1.5rem;
+      cursor: pointer;
+      width: 292px;
+      height: 52px;
+      font-weight: 500;
+      font-size: 1rem;
+      background-color: #5ece7b;
+      color: #ffffff;
+      border: none;
+
+      &:disabled {
+        cursor: not-allowed;
+        background-color: #ffffff;
+        color: #000000;
+        border: 1px solid #000000;
+        opacity: 0.6;
+      }
+    }
+  }
 }

@@ -2,9 +2,12 @@
   width: 100%;
   padding: 5%;
   border-radius: 3px;
+
   &__image-container {
     position: relative;
     cursor: pointer;
+    // overflow: hidden;
+    // box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
     .product__image {
       width: 354px;
