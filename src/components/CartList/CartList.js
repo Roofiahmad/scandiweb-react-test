@@ -46,30 +46,32 @@ class CartList extends Component {
             <span className="title--bold">{this.props.product.brand}</span> <span className="title--light">{this.props.product.name}</span>
           </p>
           <p className="title--price">
-            {currencySymbol} {priceFilter(this.props.product, currencyProps, this.props.product.quantity)}
+            {currencySymbol} {priceFilter(this.props.product, currencyProps)}
           </p>
           <div className="item__attribute">
-            {this.props.product.attributes.map((attr) => {
-              return attr.items.map((item, indx) => {
-                return (
-                  <button
-                    key={indx}
-                    // className={`btn uppercase tooltip ${
-                    //   this.props.product.cartAttributes[attr.id] === item.id ? "btn--black" : attr.type === "swatch" ? item.id : "btn--none"
-                    // }`}
-                    className={`btn uppercase tooltip ${
-                      attr.type === "swatch" && this.props.product.cartAttributes[attr.id] === item.id
-                        ? item.id
-                        : this.props.product.cartAttributes[attr.id] === item.id
-                        ? "btn--black"
-                        : "btn--none"
-                    }`}
-                  >
-                    {attr.type === "swatch" ? item.displayValue : item.value}
-                    <span className="tooltiptext">{attr.id}</span>
-                  </button>
-                );
-              });
+            {this.props.product.attributes.map((attr, idx) => {
+              return (
+                <div key={idx} className="wrapper tooltip">
+                  <p className="item__attribute-title">{attr.name.length >= 9 ? attr.name.slice(0, 9) : attr.name}</p>
+                  {attr.items.map((item, indx) => {
+                    return (
+                      <button
+                        key={indx}
+                        className={`btn uppercase  ${
+                          attr.type === "swatch" && this.props.product.cartAttributes[attr.id] === item.id
+                            ? item.id
+                            : this.props.product.cartAttributes[attr.id] === item.id
+                            ? "btn--black"
+                            : "btn--none"
+                        }`}
+                      >
+                        {attr.type === "swatch" ? "" : item.value}
+                        <span className="tooltiptext">{attr.id}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              );
             })}
           </div>
         </div>
@@ -88,12 +90,18 @@ class CartList extends Component {
             backgroundImage: `url(${this.props.product.gallery[this.state.imagePreviewIndex]})`,
           }}
         >
-          <button onClick={() => this.prevImage()} className="btn image-navigation">
-            <span>&#8249;</span>
-          </button>
-          <button onClick={() => this.nextImage()} className="btn image-navigation">
-            <span>&#8250;</span>
-          </button>
+          {this.props.product.gallery.length > 1 ? (
+            <>
+              <button onClick={() => this.prevImage()} className="btn image-navigation">
+                <span>&#8249;</span>
+              </button>
+              <button onClick={() => this.nextImage()} className="btn image-navigation">
+                <span>&#8250;</span>
+              </button>
+            </>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     );

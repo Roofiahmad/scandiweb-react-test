@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Navigate } from "react-router-dom";
+import DOMPurify from "dompurify";
+import parse from "html-react-parser";
 
 import { addToCart } from "../../redux/cart";
 import { priceFilter } from "../../util";
@@ -23,7 +24,7 @@ class ProductDetail extends Component {
         productPrice: { price: 0, currency: "" },
         attributes: {},
       },
-      redirect: false,
+      successAdded: false,
     };
     this.switchCategory = this.switchCategory.bind(this);
     this.setPreview = this.setPreview.bind(this);
@@ -102,7 +103,11 @@ class ProductDetail extends Component {
 
   handleButtonCart() {
     this.props.addToCart(this.state.userProduct);
-    this.setState({ ...this.state, redirect: true });
+    this.setState({ ...this.state, successAdded: true }, () => {
+      setTimeout(() => {
+        this.setState({ ...this.state, successAdded: false });
+      }, 1000);
+    });
   }
 
   componentDidMount() {
@@ -116,6 +121,8 @@ class ProductDetail extends Component {
   }
 
   render() {
+    const cleanHtml = DOMPurify.sanitize(this.state.product.description, { USE_PROFILES: { html: true } });
+
     return (
       <div>
         <Header switchCategory={this.switchCategory} category={this.state.category} />
@@ -124,10 +131,9 @@ class ProductDetail extends Component {
             {this.state.product.gallery.map((image, idx) => {
               return (
                 <img
-                  style={{ opacity: image === this.state.preview ? 1 : 0.6, border: image === this.state.preview ? "1px solid #5ece7b" : "none" }}
                   key={idx}
                   onClick={(e) => this.setPreview(e)}
-                  className="product"
+                  className={`${image === this.state.preview ? "selected" : ""} product`}
                   alt={`product-${idx}`}
                   src={image}
                 />
@@ -135,7 +141,8 @@ class ProductDetail extends Component {
             })}
           </div>
           <div className="product-detail__image-preview-container">
-            <img className="image-preview" alt="product-1" src={this.state.preview} />
+            <img className={this.state.product.inStock ? "image-preview" : "image-preview outOfStock"} alt="product-1" src={this.state.preview} />
+            {this.state.product.inStock ? "" : <span className="label">Out of stock</span>}
           </div>
           <div className="product-detail__action">
             <h1 className="product-title">
@@ -153,11 +160,11 @@ class ProductDetail extends Component {
                             <button
                               onClick={() => this.handleButtonAttribute(attr.id, item.id)}
                               key={indx}
-                              className={`btn-attribute uppercase ${
-                                item.id === this.state.userProduct.attributes[attr.name] ? "active" : attr.type === "swatch" ? item.id : "default"
-                              }`}
+                              className={`btn-attribute uppercase ${attr.type === "swatch" ? item.id : "default"}
+                              ${item.id === this.state.userProduct.attributes[attr.name] ? "active" : ""}
+                              `}
                             >
-                              {attr.type === "swatch" ? item.displayValue : item.value}
+                              {attr.type === "swatch" ? "" : item.value}
                             </button>
                           );
                         })}
@@ -177,10 +184,16 @@ class ProductDetail extends Component {
             <button onClick={() => this.handleButtonCart()} disabled={!this.state.product.inStock} className="btn-cart uppercase">
               add to cart
             </button>
-            <div className="product-description" dangerouslySetInnerHTML={{ __html: this.state.product.description }}></div>
+            <div className="product-description">{parse(cleanHtml)}</div>
           </div>
+          {this.state.successAdded ? (
+            <div className="success-added">
+              <p>your product succesfully added to cart :)</p>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
-        {this.state.redirect ? <Navigate to="/cart" /> : ""}
       </div>
     );
   }

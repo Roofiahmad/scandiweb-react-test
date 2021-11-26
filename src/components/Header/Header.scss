@@ -34,6 +34,25 @@ header {
     display: flex;
     align-content: baseline;
 
+    &-badge {
+      position: relative;
+      top: -10px;
+      left: -10px;
+      background-color: #000000;
+      width: 19px;
+      height: 19px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &-count {
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: #ffffff;
+      }
+    }
+
     &:hover {
       color: #44ff03;
     }

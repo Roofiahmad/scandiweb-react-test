@@ -25,6 +25,7 @@ class ProductList extends Component {
           name
           products{
             id
+            brand
             name
             inStock
             gallery
@@ -90,7 +91,7 @@ class ProductList extends Component {
               : ""}
           </div>
         </main>
-        <footer style={{ marginBottom: "2.5%" }}></footer>
+        <footer></footer>
       </div>
     );
   }

@@ -38,12 +38,7 @@ class ProductCard extends Component {
       >
         <Link to={`/detail/${this.props.product.id}`}>
           <div className="product-card__image-container">
-            <img
-              src={this.props.product.gallery[0]}
-              alt="Product"
-              className="product__image"
-              style={{ opacity: !this.props.product.inStock ? 0.3 : 1 }}
-            />
+            <img src={this.props.product.gallery[0]} alt="Product" className={`${!this.props.product.inStock ? "out-of-stock" : 1} product__image`} />
             {!this.props.product.inStock ? <p className="product__out-of-stock">Out Of Stock</p> : ""}
             {!this.state.hover || !this.props.product.inStock || (
               <button className="product__cart-button">
@@ -59,7 +54,7 @@ class ProductCard extends Component {
                 {attr.items.map((item, index) => {
                   return (
                     <button key={index} className={attr.type === "swatch" ? `${item.id}` : "default"}>
-                      {attr.type === "swatch" ? item.id : item.value}
+                      {attr.type === "swatch" ? "" : item.value}
                     </button>
                   );
                 })}
@@ -67,10 +62,9 @@ class ProductCard extends Component {
             );
           })}
         </div>
-        <h2 style={{ opacity: !this.state.inStock ? 0.5 : 1 }} className="product-card__title">
-          {this.props.product.name}
-        </h2>
-        <p style={{ opacity: !this.state.inStock ? 0.5 : 1 }} className="product-card__price">
+        <h2 className={` ${!this.props.product.inStock ? "out-of-stock" : 1} product-card__title`}>{this.props.product.brand}</h2>
+        <h2 className={`${!this.props.product.inStock ? "out-of-stock" : 1} product-card__title`}>{this.props.product.name}</h2>
+        <p className={`${!this.props.product.inStock ? "out-of-stock" : 1} product-card__price`}>
           {this.props.currency.currency.html}
           {this.state.productPrice}
         </p>

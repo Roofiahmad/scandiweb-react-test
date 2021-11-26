@@ -96,7 +96,7 @@ class Cart extends Component {
         }
       });
     });
-    if (prevProps.cart.cart.productList.length !== this.props.cart.cart.productList) {
+    if (prevProps.cart.cart.productList.length !== this.props.cart.cart.productList.length) {
       this.getProductList();
     }
   }

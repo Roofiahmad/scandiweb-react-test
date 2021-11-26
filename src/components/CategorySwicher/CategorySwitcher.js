@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { setCategory } from "../../redux/category";
 
@@ -12,12 +13,12 @@ class CategorySwitcher extends Component {
   }
   render() {
     return (
-      <div onClick={() => this.props.closeAllToggle()} className="category-switcher">
+      <div className="category-switcher">
         <ul>
           {this.categories.map((category, idx) => {
             return (
               <li key={idx} onClick={() => this.props.setCategory(category)} className={this.props.category.value === category ? "text-green" : ""}>
-                {category}
+                <Link to="/">{category}</Link>
               </li>
             );
           })}

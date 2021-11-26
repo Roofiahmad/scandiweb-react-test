@@ -81,18 +81,21 @@ class CartOverlay extends Component {
 
   componentDidMount() {
     this.getProductList();
+    console.log("did mount");
   }
 
   componentDidUpdate(prevProps, prevState) {
     prevProps.cart.cart.productList.forEach((product) => {
       this.props.cart.cart.productList.forEach((prod) => {
-        if (product.quantity !== prod.quantity && product.id === prod.id) {
+        if (product.quantity !== prod.quantity && product.transaction_id === prod.transaction_id) {
           this.getProductList();
+          return console.log("fetching data a");
         }
       });
     });
     if (prevProps.cart.cart.productList.length !== this.props.cart.cart.productList.length) {
       this.getProductList();
+      console.log("fetching data b");
     }
   }
 
@@ -119,27 +122,31 @@ class CartOverlay extends Component {
                     <span className="product">{product.name}</span>
                   </p>
                   <p className="text-medium">
-                    {currencySymbol} {priceFilter(product, this.props.currency, product.quantity)}
+                    {currencySymbol} {priceFilter(product, this.props.currency)}
                   </p>
                   <div className="item__attribute">
-                    {product.attributes.map((attr) => {
-                      return attr.items.map((item, indx) => {
-                        return (
-                          <button
-                            key={indx}
-                            className={`btn uppercase tooltip ${
-                              attr.type === "swatch" && product.cartAttributes[attr.id] === item.id
-                                ? item.id
-                                : product.cartAttributes[attr.id] === item.id
-                                ? "btn--black"
-                                : "btn--none"
-                            }`}
-                          >
-                            {attr.type === "swatch" ? item.displayValue : item.value}
-                            <span className="tooltiptext">{attr.id}</span>
-                          </button>
-                        );
-                      });
+                    {product.attributes.map((attr, idx) => {
+                      return (
+                        <div key={idx} className="wrapper">
+                          <p className="item__attribute-title">{attr.name.length >= 9 ? attr.name.slice(0, 9) : attr.name}</p>
+                          {attr.items.map((item, indx) => {
+                            return (
+                              <button
+                                key={indx}
+                                className={`btn uppercase  ${
+                                  attr.type === "swatch" && product.cartAttributes[attr.id] === item.id
+                                    ? item.id
+                                    : product.cartAttributes[attr.id] === item.id
+                                    ? "btn--black"
+                                    : "btn--none"
+                                }`}
+                              >
+                                {attr.type === "swatch" ? "" : item.value}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      );
                     })}
                   </div>
                 </div>
@@ -159,7 +166,10 @@ class CartOverlay extends Component {
 
           <p className="cart-overlay__totalprice">
             <span className="text-medium">Total</span>
-            <span className="text-bold">${totalPrice}</span>
+            <span className="text-bold">
+              {currencySymbol}
+              {totalPrice}
+            </span>
           </p>
           <div className="cart-overlay__button">
             <Link to="/cart">

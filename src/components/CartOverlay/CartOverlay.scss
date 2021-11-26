@@ -1,16 +1,17 @@
 .cart-overlay {
-  position: fixed;
+  position: absolute;
+  top: 10vh;
+  right: 0;
   height: 100vh;
   width: 100%;
   background: rgba(57, 55, 72, 0.22);
-  z-index: 100;
 
   animation-name: appear;
   animation-duration: 0.3s;
 
   &__content {
     position: absolute;
-    right: 5%;
+    right: 5vw;
     width: 325px;
     min-height: min-content;
     max-height: 500px;
@@ -70,50 +71,56 @@
         grid-gap: 10px;
         width: 100%;
 
-        .btn {
-          cursor: pointer;
-          border: 1px solid black;
-          height: 24px;
-          padding: 4px 3px;
-
-          &--none {
-            display: none;
+        .wrapper {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          .item__attribute-title {
+            text-align: center;
+            font-size: 0.8rem;
           }
 
-          &--white {
-            background-color: transparent;
+          .btn {
+            cursor: pointer;
+            border: 1px solid black;
+            height: 24px;
+            padding: 4px 3px;
+
+            &--none {
+              display: none;
+            }
+
+            &--black {
+              color: #ffffff;
+              background-color: #000000;
+            }
           }
 
-          &--black {
+          .Green {
+            border: 1px solid #44ff03;
+            color: #ffffff;
+            background-color: #44ff03;
+          }
+          .Cyan {
+            border: 1px solid #03fff7;
+            color: #ffffff;
+            background-color: #03fff7;
+          }
+          .Blue {
+            border: 1px solid #030bff;
+            color: #ffffff;
+            background-color: #030bff;
+          }
+          .Black {
+            border: 1px solid #000000;
             color: #ffffff;
             background-color: #000000;
           }
-        }
-
-        .Green {
-          border: 1px solid #44ff03;
-          color: #ffffff;
-          background-color: #44ff03;
-        }
-        .Cyan {
-          border: 1px solid #03fff7;
-          color: #ffffff;
-          background-color: #03fff7;
-        }
-        .Blue {
-          border: 1px solid #030bff;
-          color: #ffffff;
-          background-color: #030bff;
-        }
-        .Black {
-          border: 1px solid #000000;
-          color: #ffffff;
-          background-color: #000000;
-        }
-        .White {
-          border: 1px solid #000000;
-          background-color: transparent;
-          color: #000000;
+          .White {
+            border: 1px solid #000000;
+            background-color: transparent;
+            color: #000000;
+          }
         }
       }
 
