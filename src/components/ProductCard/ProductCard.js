@@ -60,15 +60,18 @@ class ProductCard extends Component {
         <div className="product-card__product-attribute-container">
           {this.props.product.attributes.map((attr, idx) => {
             return (
-              <div key={idx} className="attribute">
-                {attr.items.map((item, index) => {
-                  return (
-                    <button key={index} className={attr.type === "swatch" ? `${item.id}` : "default"}>
-                      {attr.type === "swatch" ? "" : item.value}
-                    </button>
-                  );
-                })}
-              </div>
+              <>
+                <p>{attr.name}</p>
+                <div key={idx} className="attribute">
+                  {attr.items.map((item, index) => {
+                    return (
+                      <button key={index} className={attr.type === "swatch" ? `${item.id}` : "default"}>
+                        {attr.type === "swatch" ? "" : item.value}
+                      </button>
+                    );
+                  })}
+                </div>
+              </>
             );
           })}
         </div>
