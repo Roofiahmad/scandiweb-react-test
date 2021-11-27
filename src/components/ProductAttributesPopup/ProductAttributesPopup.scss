@@ -120,6 +120,7 @@
         }
         .default {
           border: 1px solid #000000;
+          background-color: transparent;
           &:hover,
           &.active {
             background-color: #000000;
