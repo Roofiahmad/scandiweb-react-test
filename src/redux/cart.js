@@ -6,11 +6,11 @@ export const cartSlice = createSlice({
     cart: {
       productList: [],
     },
+    attributePopup: { toggle: false, product: {} },
   },
 
   reducers: {
     addToCart: (state, action) => {
-      console.log(action.payload);
       let isSameProduct = false;
       let isSameAttribute = false;
       let cartIndex;
@@ -30,8 +30,6 @@ export const cartSlice = createSlice({
         }
       });
 
-      console.log("same product", isSameProduct);
-      console.log("same attribute", isSameAttribute);
       if (isSameProduct && isSameAttribute) {
         state.cart.productList[cartIndex].quantity += 1;
       } else {
@@ -56,11 +54,14 @@ export const cartSlice = createSlice({
         state.cart.productList.splice(productIndex, 1);
       }
     },
+    toggleAttributeCart: (state, action) => {
+      state.attributePopup = { ...action.payload };
+    },
   },
 });
 
 const { actions, reducer } = cartSlice;
 
-export const { addToCart, increaseQuantity, decreaseQuantity } = actions;
+export const { addToCart, increaseQuantity, decreaseQuantity, toggleAttributeCart } = actions;
 
 export default reducer;

@@ -10,6 +10,12 @@ header {
   height: 80px;
   background-color: #ffffff;
 }
+.shop-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 .switch-container {
   display: flex;

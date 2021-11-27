@@ -56,7 +56,7 @@ class Header extends Component {
         <header>
           <CategorySwitcher />
           <Link to="/">
-            <ShopIcon />
+            <ShopIcon className="shop-icon" />
           </Link>
           <div className="switch-container" ref={this.container}>
             <div className="currency" onClick={this.priceSwitchToggle}>

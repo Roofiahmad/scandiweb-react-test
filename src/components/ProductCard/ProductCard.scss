@@ -6,8 +6,6 @@
   &__image-container {
     position: relative;
     cursor: pointer;
-    // overflow: hidden;
-    // box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
     .product__image {
       width: 354px;
@@ -41,9 +39,14 @@
       position: absolute;
       right: 10px;
       bottom: -10px;
+      cursor: pointer;
 
       animation-name: appear_from_below;
       animation-duration: 0.3s;
+
+      .product__cart-icon {
+        width: 90%;
+      }
     }
   }
 

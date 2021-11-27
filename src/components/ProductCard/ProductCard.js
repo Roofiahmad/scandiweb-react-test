@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 
+import { toggleAttributeCart } from "../../redux/cart";
 import cartIcon from "../../images/cart-white.svg";
 import { priceFilter } from "../../util";
 import "./ProductCard.scss";
@@ -14,7 +15,17 @@ class ProductCard extends Component {
       hover: false,
       product: {},
       productPrice: 0,
+      attributePopUp: false,
+      redirect: false,
     };
+  }
+
+  productCartHandler(e) {
+    if (e.target.className === "product__cart-button" || e.target.className === "product__cart-icon") {
+      this.props.toggleAttributeCart({ toggle: true, product: this.props.product });
+    } else {
+      this.setState({ ...this.state, redirect: true });
+    }
   }
 
   componentDidMount() {
@@ -36,17 +47,16 @@ class ProductCard extends Component {
         onMouseEnter={() => this.setState({ ...this.state, hover: true })}
         onMouseLeave={() => this.setState({ ...this.state, hover: false })}
       >
-        <Link to={`/detail/${this.props.product.id}`}>
-          <div className="product-card__image-container">
-            <img src={this.props.product.gallery[0]} alt="Product" className={`${!this.props.product.inStock ? "out-of-stock" : 1} product__image`} />
-            {!this.props.product.inStock ? <p className="product__out-of-stock">Out Of Stock</p> : ""}
-            {!this.state.hover || !this.props.product.inStock || (
-              <button className="product__cart-button">
-                <img src={cartIcon} width={"90%"} alt="cart-icon" />
-              </button>
-            )}
-          </div>
-        </Link>
+        <div onClick={(e) => this.productCartHandler(e)} className="product-card__image-container">
+          <img src={this.props.product.gallery[0]} alt="Product" className={`${!this.props.product.inStock ? "out-of-stock" : 1} product__image`} />
+          {!this.props.product.inStock ? <p className="product__out-of-stock">Out Of Stock</p> : ""}
+          {!this.state.hover || !this.props.product.inStock || (
+            <button className="product__cart-button">
+              <img className="product__cart-icon" src={cartIcon} alt="cart-icon" />
+            </button>
+          )}
+        </div>
+
         <div className="product-card__product-attribute-container">
           {this.props.product.attributes.map((attr, idx) => {
             return (
@@ -68,6 +78,7 @@ class ProductCard extends Component {
           {this.props.currency.currency.html}
           {this.state.productPrice}
         </p>
+        {this.state.redirect ? <Navigate to={`/detail/${this.props.product.id}`} /> : ""}
       </div>
     );
   }
@@ -77,4 +88,8 @@ const mapStateToProps = (state) => ({
   currency: state.currency,
 });
 
-export default connect(mapStateToProps)(ProductCard);
+const mapDispatchToProps = () => ({
+  toggleAttributeCart,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps())(ProductCard);

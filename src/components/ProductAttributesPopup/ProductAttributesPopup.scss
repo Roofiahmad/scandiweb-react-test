@@ -1,0 +1,185 @@
+.productAttributesPopup {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  background: rgba(57, 55, 72, 0.22);
+  z-index: 2000;
+
+  &-container {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    width: 350px;
+    padding: 0.8rem 1rem;
+    background-color: #ffffff;
+    border-radius: 5px;
+    position: relative;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    .close {
+      align-self: flex-end;
+      float: right;
+      margin: 5px 10px;
+      font-weight: 500;
+      font-size: 1.2rem;
+      cursor: pointer;
+
+      &:hover {
+        color: red;
+      }
+    }
+
+    .brand {
+    }
+    .title {
+    }
+
+    .image {
+      align-self: center;
+      width: 260px;
+      max-height: 280px;
+      object-fit: contain;
+    }
+
+    .attribute-container {
+      .attribute {
+        display: flex;
+        justify-content: flex-start;
+        margin-bottom: 5px;
+        button {
+          margin-right: 10px;
+          border: 1px solid black;
+          height: 24px;
+          padding: 4px 3px;
+          border-radius: 10%;
+          cursor: pointer;
+        }
+
+        .Green {
+          height: 24px;
+          width: 24px;
+          border: 1px solid #44ff03;
+          color: #ffffff;
+          background-color: #44ff03;
+          &:hover,
+          &.active {
+            border: 2px solid red;
+            background-color: darken(#44ff03, 10);
+          }
+        }
+        .Cyan {
+          height: 24px;
+          width: 24px;
+          border: 1px solid #03fff7;
+          color: #ffffff;
+          background-color: #03fff7;
+          &:hover,
+          &.active {
+            border: 2px solid red;
+            background-color: darken(#03fff7, 10);
+          }
+        }
+        .Blue {
+          height: 24px;
+          width: 24px;
+          border: 1px solid #030bff;
+          color: #ffffff;
+          background-color: #030bff;
+          &:hover,
+          &.active {
+            border: 2px solid red;
+            background-color: darken(#030bff, 10);
+          }
+        }
+        .Black {
+          height: 24px;
+          width: 24px;
+          border: 1px solid #000000;
+          color: #ffffff;
+          background-color: #000000;
+          &:hover,
+          &.active {
+            border: 2px solid red;
+            background-color: darken(#000000, 10);
+          }
+        }
+        .White {
+          height: 24px;
+          width: 24px;
+          border: 1px solid #000000;
+          background-color: transparent;
+          color: #000000;
+          &:hover,
+          &.active {
+            border: 2px solid red;
+            background-color: darken(#ffffff, 10);
+          }
+        }
+        .default {
+          border: 1px solid #000000;
+          &:hover,
+          &.active {
+            background-color: #000000;
+            color: #ffffff;
+          }
+        }
+      }
+    }
+    .btn-cart {
+      align-self: center;
+      margin-top: 1rem;
+      cursor: pointer;
+      width: 100%;
+      height: 52px;
+      font-weight: 500;
+      font-size: 1rem;
+      background-color: #5ece7b;
+      color: #ffffff;
+      border: none;
+
+      // &:disabled {
+      //   cursor: not-allowed;
+      //   background-color: #ffffff;
+      //   color: #000000;
+      //   border: 1px solid #000000;
+      //   opacity: 0.6;
+      // }
+    }
+    .message {
+      &-success {
+        text-align: center;
+        color: #ffffff;
+        position: absolute;
+        border-radius: 3px;
+        width: 20vw;
+        padding: 10px 15px;
+        top: 3%;
+        left: 50%;
+        transform: translateX(-50%);
+        text-transform: uppercase;
+        animation-name: appear;
+        animation-duration: 0.3s;
+        background-color: #5ece7c;
+      }
+
+      &-error {
+        text-align: center;
+        color: #ffffff;
+        position: absolute;
+        border-radius: 3px;
+        width: 20vw;
+        padding: 10px 15px;
+        top: 3%;
+        left: 50%;
+        transform: translateX(-50%);
+        text-transform: uppercase;
+        animation-name: appear;
+        animation-duration: 0.3s;
+        background-color: red;
+      }
+    }
+  }
+}

@@ -6,6 +6,7 @@ import { setCategory } from "../../redux/category";
 
 import Header from "../../components/Header/Header";
 import ProductCard from "../../components/ProductCard/ProductCard";
+import ProductAttributesPopup from "../../components/ProductAttributesPopup/ProductAttributesPopup";
 
 import "./ProductList.scss";
 
@@ -92,6 +93,7 @@ class ProductList extends Component {
           </div>
         </main>
         <footer></footer>
+        {this.props.attributesPopUp.toggle ? <ProductAttributesPopup /> : ""}
       </div>
     );
   }
@@ -100,6 +102,7 @@ class ProductList extends Component {
 const mapStateToProps = (state) => ({
   currency: state.currency,
   category: state.category,
+  attributesPopUp: state.cart.attributePopup,
 });
 
 const mapDispatchToProps = () => ({

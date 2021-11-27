@@ -81,21 +81,18 @@ class CartOverlay extends Component {
 
   componentDidMount() {
     this.getProductList();
-    console.log("did mount");
   }
 
   componentDidUpdate(prevProps, prevState) {
     prevProps.cart.cart.productList.forEach((product) => {
       this.props.cart.cart.productList.forEach((prod) => {
         if (product.quantity !== prod.quantity && product.transaction_id === prod.transaction_id) {
-          this.getProductList();
-          return console.log("fetching data a");
+          return this.getProductList();
         }
       });
     });
     if (prevProps.cart.cart.productList.length !== this.props.cart.cart.productList.length) {
       this.getProductList();
-      console.log("fetching data b");
     }
   }
 

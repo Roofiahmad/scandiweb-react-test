@@ -25,6 +25,7 @@ class ProductDetail extends Component {
         attributes: {},
       },
       successAdded: false,
+      error: false,
     };
     this.switchCategory = this.switchCategory.bind(this);
     this.setPreview = this.setPreview.bind(this);
@@ -102,12 +103,33 @@ class ProductDetail extends Component {
   }
 
   handleButtonCart() {
+    const prodAttrKey = this.state.product.attributes.length;
+    const selectedAttr = Object.keys(this.state.userProduct.attributes).length;
+    if (prodAttrKey !== selectedAttr) {
+      // if some attribute empty
+      return this.setState({ ...this.state, error: true }, () => {
+        setTimeout(() => {
+          this.setState({ ...this.state, error: false });
+        }, 1000);
+      });
+    }
+    // if all attribute selected
     this.props.addToCart(this.state.userProduct);
-    this.setState({ ...this.state, successAdded: true }, () => {
-      setTimeout(() => {
-        this.setState({ ...this.state, successAdded: false });
-      }, 1000);
-    });
+    this.setState(
+      {
+        ...this.state,
+        successAdded: true,
+        userProduct: {
+          ...this.state.userProduct,
+          attributes: {},
+        },
+      },
+      () => {
+        setTimeout(() => {
+          this.setState({ ...this.state, successAdded: false });
+        }, 1000);
+      }
+    );
   }
 
   componentDidMount() {
@@ -116,7 +138,13 @@ class ProductDetail extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.currency.currency.key !== this.props.currency.currency.key) {
-      this.setState({ ...this.state, productPrice: priceFilter(this.state.product, this.props.currency) });
+      this.setState({
+        ...this.state,
+        userProduct: {
+          ...this.state.userProduct,
+          productPrice: { price: priceFilter(this.state.product, this.props.currency), currency: this.props.currency.currency.key },
+        },
+      });
     }
   }
 
@@ -179,6 +207,7 @@ class ProductDetail extends Component {
               <p className="price">
                 {this.props.currency.currency.html}
                 {this.state.userProduct.productPrice.price}
+                {/* {priceFilter(this.props.product, this.props.currency)} */}
               </p>
             </div>
             <button onClick={() => this.handleButtonCart()} disabled={!this.state.product.inStock} className="btn-cart uppercase">
@@ -187,8 +216,15 @@ class ProductDetail extends Component {
             <div className="product-description">{parse(cleanHtml)}</div>
           </div>
           {this.state.successAdded ? (
-            <div className="success-added">
+            <div className="message-success">
               <p>your product succesfully added to cart :)</p>
+            </div>
+          ) : (
+            ""
+          )}
+          {this.state.error ? (
+            <div className="message-error">
+              <p>attribute can't be empty !!!</p>
             </div>
           ) : (
             ""
