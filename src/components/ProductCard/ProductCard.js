@@ -61,7 +61,7 @@ class ProductCard extends Component {
           {this.props.product.attributes.map((attr, idx) => {
             return (
               <>
-                <p>{attr.name}</p>
+                <p key={attr.name + idx}>{attr.name}</p>
                 <div key={idx} className="attribute">
                   {attr.items.map((item, index) => {
                     return (

@@ -21,6 +21,10 @@ export const cartSlice = createSlice({
         if (product.id === action.payload.id) {
           isSameProduct = true;
           const cartAttributesKeys = Object.keys(product.attributes);
+          if (cartAttributesKeys.length === 0) {
+            cartIndex = index;
+            return (isSameAttribute = true);
+          }
           cartAttributesKeys.forEach((cartAttr) => {
             if (product.attributes[cartAttr] === action.payload.attributes[cartAttr]) {
               cartIndex = index;

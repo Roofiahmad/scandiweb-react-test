@@ -34,7 +34,6 @@ class Header extends Component {
   };
 
   handleClickOutside = (event) => {
-    // console.log();
     if ((this.container.current && !this.container.current.contains(event.target)) || event.target.className === "cart-overlay") {
       this.setState({
         priceSwitch: false,
@@ -51,6 +50,13 @@ class Header extends Component {
   }
 
   render() {
+    let itemQuantity = 0;
+    if (this.props.cart.productList.length) {
+      for (const item of this.props.cart.productList) {
+        itemQuantity += item.quantity;
+      }
+    }
+    console.log(itemQuantity);
     return (
       <>
         <header>
@@ -61,18 +67,19 @@ class Header extends Component {
           <div className="switch-container" ref={this.container}>
             <div className="currency" onClick={this.priceSwitchToggle}>
               <p>{this.props.currency.currency.html}</p> <i className="fas fa-chevron-down"></i>
+              {this.state.priceSwitch ? <PriceSwitcher priceSwitchToggle={this.priceSwitchToggle} /> : ""}
             </div>
             <div className="cart" onClick={this.cartMenuToggle}>
               <CartIcon />
               {this.props.cart.productList.length > 0 ? (
                 <div className="cart-badge">
-                  <span className="cart-badge-count">{this.props.cart.productList.length}</span>
+                  <span className="cart-badge-count">{itemQuantity}</span>
                 </div>
               ) : (
                 ""
               )}
             </div>
-            {this.state.priceSwitch ? <PriceSwitcher priceSwitchToggle={this.priceSwitchToggle} /> : ""}
+
             {this.state.cartMenu ? <CartOverlay /> : ""}
           </div>
         </header>

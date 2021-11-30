@@ -9,7 +9,7 @@ class ProductAttributesPopup extends Component {
     super(props);
     this.state = {
       userProduct: {
-        id: "",
+        id: this.props.attributesPopUp.product.id,
         productPrice: { price: 0, currency: "" },
         attributes: {},
       },
@@ -35,6 +35,7 @@ class ProductAttributesPopup extends Component {
       });
     }
     this.props.addToCart(this.state.userProduct);
+    console.log(this.state.userProduct);
     this.setState(
       {
         ...this.state,
@@ -70,7 +71,9 @@ class ProductAttributesPopup extends Component {
             {this.props.attributesPopUp.product.attributes.map((attr, idx) => {
               return (
                 <>
-                  <p className="attribute-name">{attr.name}</p>
+                  <p key={attr.name} className="attribute-name">
+                    {attr.name}
+                  </p>
                   <div key={idx} className="attribute">
                     {attr.items.map((item, index) => {
                       return (
