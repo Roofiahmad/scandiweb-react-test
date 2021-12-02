@@ -25,10 +25,13 @@ export const cartSlice = createSlice({
             cartIndex = index;
             return (isSameAttribute = true);
           }
+          isSameAttribute = true;
           cartAttributesKeys.forEach((cartAttr) => {
             if (product.attributes[cartAttr] === action.payload.attributes[cartAttr]) {
               cartIndex = index;
-              return (isSameAttribute = true);
+              isSameAttribute = isSameAttribute && true;
+            } else {
+              isSameAttribute = isSameAttribute && false;
             }
           });
         }
